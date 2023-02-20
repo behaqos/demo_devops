@@ -1,0 +1,80 @@
+- name: Uninstall software from Ubuntu server
+  hosts: demo_server
+  become: yes
+
+  tasks:
+    - name: Stop and disable GitLab service
+      systemd:
+            name: gitlab-runsvdir.service
+            state: stopped
+            enabled: no
+
+    - name: Uninstall GitLab package
+      apt:
+          name: gitlab-ce
+          state: absent
+
+    - name: Remove GitLab configuration, data and logs
+      file:
+          path: "{{ item }}"
+          state: absent
+      with_items:
+        - /etc/gitlab
+        - /var/opt/gitlab
+        - /var/log/gitlab
+
+    - name: Stop and disable Grafana service
+      systemd:
+          name: grafana-server
+          state: stopped
+          enabled: no
+
+    - name: Uninstall Grafana package
+      apt:
+          name: grafana
+          state: absent
+
+    - name: Remove Grafana configuration and data
+      file:
+          path: "{{ item }}"
+          state: absent
+      with_items:
+        - /etc/grafana
+        - /var/lib/grafana
+        - /var/log/grafana
+
+    - name: Stop and disable PostgreSQL service
+      systemd:
+          name: postgresql
+          state: stopped
+          enabled: no
+
+    - name: Uninstall PostgreSQL package
+      apt:
+          name: postgresql
+          state: absent
+
+    - name: Remove PostgreSQL data directory
+      file:
+          path: /var/lib/postgresql
+          state: absent
+
+    - name: Stop and disable Nginx service
+      systemd:
+          name: nginx
+          state: stopped
+          enabled: no
+
+    - name: Uninstall Nginx package
+      apt:
+          name: nginx
+          state: absent
+
+    - name: Remove Nginx configuration and data
+      file:
+          path: "{{ item }}"
+          state: absent
+      with_items:
+        - /etc/nginx
+        - /var/www/html
+        - /var/log/nginx

@@ -1,0 +1,103 @@
+- name: Install and configure software on Ubuntu server
+  hosts: demo_server
+  become: yes
+
+  tasks:
+        - name: Update & upgrade packages
+          apt:
+                update_cache: yes
+                upgrade: dist
+
+        - name: Install ufw
+          apt:
+              name: ufw
+              state: present
+
+        - name: Allow OpenSSH
+          ufw:
+              rule: allow
+              name: OpenSSH
+
+        - name: Add GitLab package repository key
+          apt_key:
+              url: "https://packages.gitlab.com/gpg.key"
+              state: present
+
+        - name: Add GitLab package repository
+          apt_repository:
+              repo: "deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/ {{ ansible_distribution_release }} main"
+              state: present
+              validate_certs: yes
+
+        - name: Install GitLab package dependencies
+          apt:
+              name:
+              - tzdata
+              - openssh-server
+              - ca-certificates
+              - postfix
+              state: present
+
+        - name: Install GitLab package
+          apt:
+              name: gitlab-ce
+              state: present
+
+        - name: Reconfigure GitLab
+          command: gitlab-ctl reconfigure
+
+        - name: Install dependencies
+          apt:
+              name:
+              - adduser
+              - libfontconfig1
+              state: present
+
+        - name: Add Grafana package repository key
+          apt_key:
+              url: https://packages.grafana.com/gpg.key
+              state: present
+
+        - name: Add Grafana package repository
+          apt_repository:
+              repo: deb https://packages.grafana.com/oss/deb stable main
+              state: present
+              validate_certs: yes
+
+        - name: Install Grafana
+          apt:
+              name: grafana
+              state: present
+
+        - name: Start and enable Grafana service
+          systemd:
+              name: grafana-server
+              state: started
+              enabled: yes
+
+        - name: Install PostgreSQL
+          apt:
+              name: postgresql
+              state: present
+
+        - name: Install Prometheus
+          apt:
+              name: prometheus
+              state: present
+
+        - name: Install Nginx
+          apt:
+              name: nginx
+              state: present
+
+        - name: Open ports for external access
+          ufw:
+              rule: allow
+              port: "{{ item }}"
+              proto: tcp
+          loop:
+            - 80
+            - 443
+            - 3000
+            - 5432
+            - 9090
