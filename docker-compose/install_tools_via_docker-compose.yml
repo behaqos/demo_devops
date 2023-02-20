@@ -38,14 +38,14 @@
 
     - name: Copy Docker Compose file to remote server
       copy:
-          src: ./docker-compose.yml
+          src: ./configs/docker-compose.yml
           dest: /home/vps/docker-compose.yml
           mode: '0644'
       tags: install_softwares
 
     - name: Copy Prometheus Config file to remote server
       copy:
-          src: ./prometheus.yml
+          src: ./configs/prometheus.yml
           dest: /home/vps/prometheus.yml
           mode: '0644'
       tags: install_softwares
@@ -56,19 +56,11 @@
           chdir: /home/vps
       tags: install_softwares
     
-    - name: Check if ports are open
-      ufw:
-          state: enabled
-          direction: incoming
-          port: "{{ item }}"
-      loop:
-        - 8080
-        - 9090
-        - 5432
-        - 3000
-        - 443
-        - 80
+    - name: Open ports if they are closed
+      shell: "ufw status"
       register: ufw_status
+      changed_when: false
+      when: ansible_os_family == 'Debian'
       tags: check_ports
 
     - name: Open ports if they are closed
@@ -83,6 +75,6 @@
         - 3000
         - 443
         - 80
-      when: "'Status: inactive' in ufw_status.stdout_lines[loop.index0]"
+      when: "'Status: inactive' in ufw_status.stdout and loop.item not in ufw_status.stdout"
       tags: check_ports
 
