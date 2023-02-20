@@ -1,0 +1,47 @@
+---
+- name: Install Kubernetes on Ubuntu
+  hosts: demo_server
+  become: yes
+
+  vars:
+      kube_version: 1.22.5-00
+      kube_pod_network_cidr: 10.244.0.0/16
+
+  tasks:
+      - name: Add Kubernetes apt key
+        apt_key:
+            url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+            state: present
+
+    - name: Add Kubernetes apt repository
+      apt_repository:
+          repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+          state: present
+
+    - name: Install Kubernetes packages
+      apt:
+          name:
+              - kubelet={{ kube_version }}
+          - kubeadm={{ kube_version }}
+          - kubectl={{ kube_version }}
+          state: present
+          update_cache: yes
+
+    - name: Initialize the Kubernetes cluster
+      shell: kubeadm init --pod-network-cidr {{ kube_pod_network_cidr }}
+      register: kubeadm_output
+      changed_when: false
+      failed_when: "'failed' in kubeadm_output.stderr or 'error' in kubeadm_output.stderr"
+      environment:
+          KUBECONFIG: /etc/kubernetes/admin.conf
+
+    - name: Configure kubectl for non-root user
+      shell: |
+        mkdir -p ~/.kube
+        cp /etc/kubernetes/admin.conf ~/.kube/config
+        chown -R {{ ansible_user }}:{{ ansible_user }} ~/.kube
+      become: false
+
+    - name: Install Flannel network plugin
+      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+      when: "'failed' not in kubeadm_output.stderr and 'error' not in kubeadm_output.stderr"
