@@ -14,12 +14,15 @@
           - docker.io
           - docker-compose
           state: present
+      tags: install_docker
 
     - name: Add user to Docker group
       user:
           name: "{{ ansible_user }}"
           groups: docker
           append: yes
+      tags: install_docker
+
 
     - name: Check if containers are running
       command: docker-compose ps --filter "status=running" --services
@@ -30,34 +33,56 @@
       args:
           chdir: /home/vps
       when: containers_running.stdout_lines | length > 0
-    
+      tags: install_softwares
+
 
     - name: Copy Docker Compose file to remote server
       copy:
           src: ./docker-compose.yml
           dest: /home/vps/docker-compose.yml
           mode: '0644'
+      tags: install_softwares
 
-    - name: Copy Ansible file to remote server
+    - name: Copy Prometheus Config file to remote server
       copy:
           src: ./prometheus.yml
           dest: /home/vps/prometheus.yml
           mode: '0644'
+      tags: install_softwares
 
     - name: Start Docker Compose services
       command: docker-compose up -d
       args:
           chdir: /home/vps
-
-    - name: Open ports for external access
+      tags: install_softwares
+    
+    - name: Check if ports are open
       ufw:
-          rule: allow
+          state: enabled
+          direction: incoming
           port: "{{ item }}"
-          proto: tcp
       loop:
-        - 80
-        - 443
-        - 3000
-        - 5432
-        - 9090
         - 8080
+        - 9090
+        - 5432
+        - 3000
+        - 443
+        - 80
+      register: ufw_status
+      tags: check_ports
+
+    - name: Open ports if they are closed
+      ufw:
+          state: enabled
+          direction: incoming
+          port: "{{ item }}"
+      loop:
+        - 8080
+        - 9090
+        - 5432
+        - 3000
+        - 443
+        - 80
+      when: "'Status: inactive' in ufw_status.stdout_lines[loop.index0]"
+      tags: check_ports
+
