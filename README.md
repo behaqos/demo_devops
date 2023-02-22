@@ -10,31 +10,31 @@ The following software tools are included in this repository:
 
 An open-source relational database management system that is widely used in DevOps environments for storing and managing application data.
 
-![PostgreSQL Logo](https://www.postgresql.org/media/img/about/press/elephant.png)
+![PostgreSQL Logo](https://www.google.ru/url?sa=i&url=https%3A%2F%2Fru.m.wikipedia.org%2Fwiki%2F%25D0%25A4%25D0%25B0%25D0%25B9%25D0%25BB%3ANginx_logo.svg&psig=AOvVaw0A_IG-wH0Pt2Eq5p3MXPri&ust=1677150904602000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCPDsgpGAqf0CFQAAAAAdAAAAABAE)
 
 ### GitLab
 
 A web-based Git repository manager that provides source code management, continuous integration, and continuous deployment services. It is a popular choice for DevOps teams looking to streamline their development workflows.
 
-![GitLab Logo](https://about.gitlab.com/images/press/gitlab-logo-1-color-black-rgb.png)
+![GitLab Logo](https://example.com/gitlab_logo.png)
 
 ### Grafana
 
 A popular open-source platform for data visualization and monitoring. It can be used to visualize and analyze a wide range of metrics, such as application performance, server health, and network traffic.
 
-![Grafana Logo](https://grafana.com/static/assets/img/grafana_icon.svg)
+![Grafana Logo](https://example.com/grafana_logo.png)
 
 ### Prometheus
 
 A powerful open-source monitoring system that is widely used in DevOps environments for collecting and analyzing metrics from various sources. It is known for its scalability, reliability, and ease of use.
 
-![Prometheus Logo](https://prometheus.io/assets/prometheus_logo-22e3629ece6d879ec7fc42af6fc0df7a8b0d2c7dc1d19245d37a7a52a813bb16.svg)
+![Prometheus Logo](https://example.com/prometheus_logo.png)
 
 ### Nginx
 
 A high-performance web server and reverse proxy that is commonly used in DevOps environments to serve static and dynamic content, handle SSL/TLS encryption, and load-balance incoming traffic.
 
-![Nginx Logo](https://www.nginx.com/wp-content/uploads/2018/08/NGINX-logo-rgb-large.png)
+![Nginx Logo](https://example.com/nginx_logo.png)
 
 ## Configurations
 
