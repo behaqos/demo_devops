@@ -10,31 +10,31 @@ The following software tools are included in this repository:
 
 An open-source relational database management system that is widely used in DevOps environments for storing and managing application data.
 
-![PostgreSQL Logo](https://upload.wikimedia.org/wikipedia/commons/c/c5/Nginx_logo.svg)
+![PostgreSQL Logo](https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg)
 
 ### GitLab
 
 A web-based Git repository manager that provides source code management, continuous integration, and continuous deployment services. It is a popular choice for DevOps teams looking to streamline their development workflows.
 
-![GitLab Logo](https://example.com/gitlab_logo.png)
+![GitLab Logo](https://pluspng.com/img-png/gitlab-logo-png-press-kit-gitlab-3828x1688.png)
 
 ### Grafana
 
 A popular open-source platform for data visualization and monitoring. It can be used to visualize and analyze a wide range of metrics, such as application performance, server health, and network traffic.
 
-![Grafana Logo](https://example.com/grafana_logo.png)
+![Grafana Logo](https://www.dmuth.org/wp-content/uploads/2021/11/grafana-logo.png)
 
 ### Prometheus
 
 A powerful open-source monitoring system that is widely used in DevOps environments for collecting and analyzing metrics from various sources. It is known for its scalability, reliability, and ease of use.
 
-![Prometheus Logo](https://example.com/prometheus_logo.png)
+![Prometheus Logo](https://cdn-images-1.medium.com/fit/t/1600/480/0*p6UbOfvgX4Jyq8CG.png)
 
 ### Nginx
 
 A high-performance web server and reverse proxy that is commonly used in DevOps environments to serve static and dynamic content, handle SSL/TLS encryption, and load-balance incoming traffic.
 
-![Nginx Logo](https://example.com/nginx_logo.png)
+![Nginx Logo](https://upload.wikimedia.org/wikipedia/commons/c/c5/Nginx_logo.svg)
 
 ## Configurations
 
