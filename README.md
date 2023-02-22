@@ -10,7 +10,7 @@ The following software tools are included in this repository:
 
 An open-source relational database management system that is widely used in DevOps environments for storing and managing application data.
 
-![PostgreSQL Logo]([https://www.google.ru/url?sa=i&url=https%3A%2F%2Fru.m.wikipedia.org%2Fwiki%2F%25D0%25A4%25D0%25B0%25D0%25B9%25D0%25BB%3ANginx_logo.svg&psig=AOvVaw0A_IG-wH0Pt2Eq5p3MXPri&ust=1677150904602000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCPDsgpGAqf0CFQAAAAAdAAAAABAE](https://upload.wikimedia.org/wikipedia/commons/c/c5/Nginx_logo.svg))
+![PostgreSQL Logo](https://upload.wikimedia.org/wikipedia/commons/c/c5/Nginx_logo.svg)
 
 ### GitLab
 
