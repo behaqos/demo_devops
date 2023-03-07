@@ -1,0 +1,186 @@
+
+
+body {
+    font-family: Arial;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    display: flex;
+}
+
+.left {
+    width: 35%;
+    background-color: #bbedb4;
+}
+
+.right {
+    width: 65%;
+    background: white;
+}
+
+.achievement-description {
+    margin-left: 20px;
+}
+
+.header-big {
+    text-align: center;
+}
+
+.name-big {
+    font-size: 60px;
+}
+
+.job-big {
+    color: white;
+    padding: 10px 20px;
+    background-color: #00008B;
+    font-size: 30px;
+    display: inline-block;
+}
+
+.photo {
+    text-align: center;
+}
+
+.photo img {
+    width: 60%;
+}
+
+.title {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    overflow: hidden;
+}
+
+.title:before,
+.title:after {
+    content: '';
+
+    /* делаем линию строчно-блочной */
+    display: inline-block;
+
+    /* выравниваем вертикально по середине */
+    vertical-align: middle;
+
+    /* не позволяем ширине превысить 100% (будет добавлен бордюр) */
+    box-sizing: border-box;
+
+    /* установка ширины в 100% делает линию равной ширине тега заголовка
+    ** благодаря этому линия заполнит все свободное пространство
+    ** слева и справа от текста
+    */
+    width: 100%;
+    height: 3px;
+    background: rgba(53, 9, 53, 0.96);
+
+    /* добавляем к линии левый и правый бордюр цветом основного фона заголовка
+    ** благодаря этому создается нужный отступ между линиями и текстом
+    */
+    border: solid #FFF;
+    border-width: 0 10px;
+}
+.title:before {
+    /* смещаем левую линию влево отрицательным отступом, равным 100% ширины
+    ** благодаря этому линия встает слева от текста
+    */
+    margin-left: -100%;
+}
+.title:after {
+    /* смещаем правую линию вправо отрицательным отступом, равным 100% ширины
+    ** благодаря этому линия встает справа от текста
+    */
+    margin-right: -100%;
+}
+
+.skills-items > div {
+    padding: 10px;
+
+}
+
+
+
+
+
+.flex-box {
+    display: flex;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    justify-content: space-between;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.box {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.box-big {
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.box-horizontal-small {
+    padding: 0 10px;
+}
+
+
+.box-vertical-small {
+    padding: 10px 0;
+}
+
+.round {
+    border-radius: 10%;
+}
+
+.is-bold {
+    font-weight: bold;
+}
+
+.ghost {
+    opacity: 0.5;
+}
+
+.center {
+    text-align: center;
+}
+
+.to-right {
+    text-align: right;
+}
+
+.half {
+    width: 50%;
+}
+
+@media(max-width: 500px) {
+    .container {
+        display: block;
+    }
+    .left {
+        width: 100%;
+    }
+
+    .right {
+        width: 100%;
+    }
+}
