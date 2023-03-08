@@ -30,6 +30,10 @@ jobs:
       env:
         ANSIBLE_VERSION: ${{ env.ANSIBLE_VERSION }}
 
+    - name: Show SSH_PRIVATE_KEY value
+      run: echo $SSH_PRIVATE_KEY
+      env:
+          SSH_PRIVATE_KEY: ${{ secrets.demo.SSH_PRIVATE_KEY }}
     - name: Create SSH directory
       run: mkdir -p ~/.ssh
 
