@@ -1,0 +1,41 @@
+name: Ansible Playbook
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  ANSIBLE_VERSION: 2.9
+
+jobs:
+  ansible:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Ansible
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common
+        sudo apt-add-repository --yes --update ppa:ansible/ansible
+        sudo apt-get install -y ansible=${ANSIBLE_VERSION}.*
+      env:
+        ANSIBLE_VERSION: ${{ env.ANSIBLE_VERSION }}
+
+    - name: Copy Inventory
+      run: |
+        echo [target_hosts] > inventory
+        echo target_host ansible_connection=local >> inventory
+
+    - name: Run Ansible Playbook
+      run: |
+        ansible-playbook docker_compose_install_to_server/install_tools_via_docker-compose.yml
+
