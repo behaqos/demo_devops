@@ -44,6 +44,9 @@ jobs:
     - name: Make SSH key executable
       run: chmod 700 ~/.ssh/id_rsa    
     
+    - name: Show id_rsa content
+      run: cat ~/.ssh/id_rsa
+
     - name: Copy Inventory
       run: |
         echo [target_hosts] > inventory
