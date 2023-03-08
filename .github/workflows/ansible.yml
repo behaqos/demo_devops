@@ -48,5 +48,5 @@ jobs:
 
     - name: Run Ansible Playbook
       run: |
-        ansible-playbook docker_compose_install_to_server/install_tools_via_docker-compose.yml
+        ansible-playbook -i hosts.ini docker_compose_install_to_server/install_tools_via_docker-compose.yml
 
