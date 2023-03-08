@@ -33,6 +33,9 @@ jobs:
     - name: Create SSH directory
       run: mkdir -p ~/.ssh
 
+    - name: Add remote host key
+      run: ssh-keyscan 185.209.162.241 >> ~/.ssh/known_hosts
+
     - name: Add SSH key
       run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
       env:
