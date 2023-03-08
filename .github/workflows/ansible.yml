@@ -45,7 +45,7 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Make SSH key executable
-      run: chmod 700 ~/.ssh/id_rsa
+      run: chmod 600 ~/.ssh/id_rsa
     
     - name: Copy Inventory
       run: |
@@ -54,5 +54,5 @@ jobs:
 
     - name: Run Ansible Playbook
       run: |
-        ansible-playbook -i hosts.ini docker_compose_install_to_server/install_tools_via_docker-compose.yml
+        ansible-playbook -i hosts.ini docker_compose_install_to_server/install_tools_via_docker-compose.yml -vv
 
