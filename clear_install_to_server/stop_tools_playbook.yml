@@ -1,0 +1,29 @@
+- name: Uninstall software from Ubuntu server
+  hosts: demo_server
+  become: yes
+
+  tasks:
+    - name: Stop GitLab service
+      service:
+          name: gitlab-runsvdir
+          state: stopped
+
+    - name: Stop Nginx service
+      service:
+          name: nginx
+          state: stopped
+
+    - name: Stop Grafana service
+      service:
+          name: grafana-server
+          state: stopped
+
+    - name: Stop Prometheus service
+      service:
+          name: prometheus
+          state: stopped
+
+    - name: Stop PostgreSQL service
+      service:
+          name: postgresql
+          state: stopped

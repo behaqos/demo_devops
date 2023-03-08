@@ -2,7 +2,7 @@
 
 body {
     font-family: Arial;
-    background-image: url('bg.jpg');
+/*    background-image: url('bg.jpg');*/
     background-size: cover;
     background-position: center;
 }
@@ -149,7 +149,7 @@ a {
 }
 
 .round {
-    border-radius: 10%;
+    border-radius: 20%;
 }
 
 .is-bold {

@@ -23,18 +23,17 @@
           append: yes
       tags: install_docker
 
-
     - name: Check if containers are running
       command: docker-compose ps --filter "status=running" --services
       register: containers_running
+      tags: stop_containers
 
     - name: Stop containers if running
       command: docker-compose down
       args:
           chdir: /home/vps
       when: containers_running.stdout_lines | length > 0
-      tags: install_softwares
-
+      tags: stop_containers
 
     - name: Copy Docker Compose file to remote server
       copy:
@@ -50,12 +49,30 @@
           mode: '0644'
       tags: install_softwares
 
+    - name: Copy static files for Nginx
+      copy:
+          src: ../front/
+          dest: /usr/share/nginx/html
+          owner: www-data
+          group: www-data
+          mode: 0755
+      become: yes
+
+    - name: Configure Nginx to serve static files
+      template:
+          src: ../front/nginx.conf
+          dest: /etc/nginx/nginx.conf
+          owner: root
+          group: root
+          mode: 0644
+      become: yes
+
     - name: Start Docker Compose services
       command: docker-compose up -d
       args:
           chdir: /home/vps
       tags: install_softwares
-    
+
     - name: Open ports if they are closed
       shell: "ufw status"
       register: ufw_status
