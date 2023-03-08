@@ -45,7 +45,7 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Make SSH key executable
-      run: chmod 70 ~/.ssh/id_rsa
+      run: chmod 700 ~/.ssh/id_rsa
     
     - name: Copy Inventory
       run: |
