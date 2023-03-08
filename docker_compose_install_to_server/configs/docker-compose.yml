@@ -50,8 +50,6 @@ services:
         volumes:
             - "/srv/nginx/logs:/var/log/nginx"
             - "/usr/share/nginx/html:/usr/share/nginx/html"
-            - "/home/vps/certs:/etc/nginx/certs:ro"
-        command: ["/bin/bash", "-c", "ln -s /home/vps/certs/combined.pem /etc/nginx/certs/combined.crt && ln -s /home/vps/certs/private.pem /etc/nginx/certs/cert.key && nginx -g 'daemon off;'"]
 
 
     prometheus:
