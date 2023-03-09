@@ -1,27 +1,6 @@
 version: '3'
 
 services:
-#    gitlab:
-#        image: gitlab/gitlab-ce:latest
-#        container_name: gitlab
-#        restart: always
-#        hostname: gitlab.example.com
-#        environment:
-#            GITLAB_OMNIBUS_CONFIG: |
-#                external_url 'http://gitlab.example.com'
-#                nginx['listen_port'] = 80
-#                nginx['listen_https'] = false
-#                postgresql['enable'] = false
-#                prometheus_monitoring['enable'] = false
-#                grafana['enable'] = false
-#        ports:
-#            - "8080:80"
-##            - "443:443"
-#        volumes:
-#            - "/srv/gitlab/config:/etc/gitlab"
-#            - "/srv/gitlab/logs:/var/log/gitlab"
-#            - "/srv/gitlab/data:/var/opt/gitlab"
-
     grafana:
         image: grafana/grafana:latest
         container_name: grafana
@@ -50,7 +29,7 @@ services:
         volumes:
             - "/srv/nginx/logs:/var/log/nginx"
             - "/usr/share/nginx/html:/usr/share/nginx/html"
-            - "/home/vps/certs:/etc/ssl/certs"
+            - "/home/vps/certs:/etc/nginx/certs"
 
     prometheus:
         image: prom/prometheus
