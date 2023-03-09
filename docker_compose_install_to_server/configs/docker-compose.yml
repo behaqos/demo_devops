@@ -50,7 +50,7 @@ services:
         volumes:
             - "/srv/nginx/logs:/var/log/nginx"
             - "/usr/share/nginx/html:/usr/share/nginx/html"
-
+            - "/home/vps/certs:/etc/ssl/certs"
 
     prometheus:
         image: prom/prometheus
