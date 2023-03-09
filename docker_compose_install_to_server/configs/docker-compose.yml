@@ -20,7 +20,7 @@ services:
             - "/srv/postgresql/data:/var/lib/postgresql/data"
 
     nginx:
-        image: nginx:latest
+        image: nginx:1.15.0
         container_name: nginx
         restart: always
         ports:
