@@ -1,0 +1,52 @@
+---
+- name: Uninstall Kubernetes on Ubuntu
+  hosts: demo_server
+  become: yes
+
+  tasks:
+    - name: Check if Kubernetes packages are installed
+      command: dpkg-query -W -f='${Status}' kubelet kubeadm kubectl
+      register: kube_pkg_status
+
+    - name: Remove Kubernetes packages
+      apt:
+          name:
+          - kubelet
+          - kubeadm
+          - kubectl
+          state: absent
+      when: "kube_pkg_status.stdout != ''"
+
+    - name: Check if the kubeadm package is installed
+      command: dpkg-query -W -f='${Status}' kubeadm
+      register: kubeadm_pkg_status
+
+    - name: Check if the Kubernetes cluster configuration directory exists
+      stat:
+          path: /etc/kubernetes
+      register: kube_config_stat
+
+    - name: Reset the Kubernetes cluster
+      shell: kubeadm reset
+      register: kubeadm_reset_output
+      environment:
+          KUBECONFIG: /etc/kubernetes/admin.conf
+      when: kube_config_stat.stat.exists and kubeadm_pkg_status.stdout != ''
+
+    - name: Remove the Kubernetes cluster configuration
+      file:
+          path: /etc/kubernetes
+          state: absent
+      when: "'failed' not in kubeadm_reset_output.stderr and 'error' not in kubeadm_reset_output.stderr"
+
+    - name: Check if the kubectl configuration file exists
+      stat:
+          path: ~/.kube/config
+      register: kubectl_config_stat
+
+    - name: Remove the kubectl configuration
+      file:
+          path: ~/.kube/config
+          state: absent
+      become: false
+      when: kubectl_config_stat.stat.exists

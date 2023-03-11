@@ -1,0 +1,3 @@
+sudo crontab -e
+0 0 1 */3 * certbot renew --quiet --cert-path /home/vps/certs/combined.pem --key-path /home/vps/certs/private_key.pem --renew-hook "docker-compose restart nginx"
+

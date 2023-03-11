@@ -8,8 +8,8 @@
       kube_pod_network_cidr: 10.244.0.0/16
 
   tasks:
-      - name: Add Kubernetes apt key
-        apt_key:
+    - name: Add Kubernetes apt key
+      apt_key:
             url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
             state: present
 
@@ -21,7 +21,7 @@
     - name: Install Kubernetes packages
       apt:
           name:
-              - kubelet={{ kube_version }}
+          - kubelet={{ kube_version }}
           - kubeadm={{ kube_version }}
           - kubectl={{ kube_version }}
           state: present
