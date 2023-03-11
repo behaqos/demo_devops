@@ -46,9 +46,9 @@ The configurations are provided in three parts:
 
 3. Kubernetes configurations (work in progress): This part will include instructions and files for deploying each software tool as a container using Kubernetes. It will provide a more advanced way to automate the deployment, scaling, and management of containerized applications across a cluster of nodes.
 
-## Documentation
+<!-- ## Documentation
 
-The project also includes documentation on best practices for deploying and managing each software tool, as well as troubleshooting tips. You can find this documentation in the `docs` directory of the repository.
+The project also includes documentation on best practices for deploying and managing each software tool, as well as troubleshooting tips. You can find this documentation in the `docs` directory of the repository. -->
 
 ## Contributing
 
